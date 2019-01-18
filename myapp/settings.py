@@ -28,7 +28,7 @@ DEBUG = True
 import django.contrib.auth
 django.contrib.auth.LOGIN_URL = '/'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['chatd-app.herokuapp.com','localhost']
 
 
 # Application definition
