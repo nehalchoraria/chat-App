@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Welcome to Chat App{% endblock %}
+{% block head %}Welcome to Chat App{% endblock %}
+{% block content %}
+ <p>Welcome {{ user.username }} !!!</p>
+ <script>
+    var interval = 10000; 
+    function doAjax() {
+        $.ajax({
+                type: 'POST',
+                url: '/onlineUsers/',
+                data: $(this).serialize(),
+                success: function (data) {
+                },
+                complete: function (data) {
+                        document.getElementById("userList").innerHTML = data.responseText;
+                        console.log(data);
+                        setTimeout(doAjax, interval);
+                }
+        });
+     }
+setTimeout(doAjax, interval);
+
+ </script>
+
+<p>Online Users are : </p>
+<div id='userList'>
+ {% for usr in onlineusers.online_now %}
+    {{usr}}<br>
+ {% endfor %}
+ <br>
+</div>
+ <a href="/logout/">Logout</a>
+{% endblock %}
