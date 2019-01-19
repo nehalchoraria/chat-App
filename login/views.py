@@ -8,6 +8,8 @@ from django.template import RequestContext
 from django.shortcuts import render 
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.utils.safestring import mark_safe
+import json
 
 @csrf_protect
 def register(request):
@@ -52,5 +54,7 @@ def logout_page(request):
 def home(request):
  return render_to_response(
  'home.html',
- { 'user': request.user , 'onlineusers':request}
+ { 'user': request.user , 'onlineusers':request , 'room_name_json': mark_safe(json.dumps(""))
+ }
  )
+

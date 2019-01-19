@@ -28,7 +28,7 @@ DEBUG = True
 import django.contrib.auth
 django.contrib.auth.LOGIN_URL = '/'
 
-ALLOWED_HOSTS = ['chatd-app.herokuapp.com','localhost']
+ALLOWED_HOSTS = ['chatd-app.herokuapp.com','localhost','127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'login',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,15 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+
+ASGI_APPLICATION = 'myapp.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 STATIC_URL = '/static/'
